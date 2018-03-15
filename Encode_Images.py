@@ -6,12 +6,12 @@ from numpy import array
 #Gets directory this file is run from. Define the Directory it gets the images from, relatively to this files directory
 cwd = os.getcwd()
 source_directory = ''.join([cwd,"\Supersampled_Dataset"])
+target_directory = "\Encoded_Dataset\ "
 
 #Defines the directory with the images you wish to encode
 source_directory_path = os.fsencode(source_directory)
 
 combinedArray = []
-print(combinedArray)
 counter = 0
 
 #Iterates through directory only considering 'png' and 'jpeg' files.
@@ -39,7 +39,7 @@ for file in os.listdir(source_directory_path):
 		#print(arr)
 		#print(img.format, img.size, img.mode)
 		#print(filepath)
-		#img.show()	
+	
 		continue
 	else:
 		continue
@@ -48,11 +48,12 @@ for file in os.listdir(source_directory_path):
 combinedArray = np.array(combinedArray)
 
 #Print out the shape of the final array
-print(combinedArray.shape)
+print("\nEncoded file's array shape (rows, pixels):",combinedArray.shape)
+print("Encoding done, file saved in:",(''.join([cwd,target_directory,"."])))
 
 #Save encoded image in current working directory with specified name as text and csv file
 cwd = os.getcwd()
-np.savetxt(''.join([cwd,"\Encoded_Dataset\Encoded_Image_List"]), combinedArray, delimiter = ",")
-np.savetxt(''.join([cwd,"\Encoded_Dataset\Encoded_Image_List.csv"]), combinedArray, delimiter = ",")
+np.savetxt(''.join([cwd,target_directory,"Encoded_Image_List"]), combinedArray, delimiter = ",")
+np.savetxt(''.join([cwd,target_directory,"Encoded_Image_List.csv"]), combinedArray, delimiter = ",")
 
 

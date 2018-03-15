@@ -9,6 +9,10 @@ Encode_Images.py / Encode_Number_Data.py
 5. Create Model from -> Created Train / Test Sets: 
 Create_Model.r
 
+Examples:
+1. Example_Eyes: Execute order -> Resize_Grayscale_Images.py -> Supersample_Images.py -> Encode_Images.py -> Create_Train_Test_Sets.r (Adapt code before) -> Create_Model.r
+2. Example_SemeionNumbers: Execure order -> Encode_Number_Data.py -> Create_Train_test_Sets.r (Adapt code before) -> Create_Model.r
+
 Required Libraries:
 - Python 3.6.3 or newer
 - Pip or Anaconda (used for installing python packages) I prefer Pip.

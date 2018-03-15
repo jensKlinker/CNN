@@ -5,16 +5,17 @@ from numpy import array
 
 #Gets directory this file is run from. Defines the "source_directory" it gets the images from, relatively to this files directory
 cwd = os.getcwd()
-source_directory = ''.join([cwd,"\Original_Images"])
 
-#Defines the directory with the images you wish to encode
+#If you intend to change your file path, do it here.
+source_directory = ''.join([cwd,"\Original_Images"])
+print("\nPath to source_directory: ",source_directory)
+
+#Encoded version of source path
 source_directory_path = os.fsencode(source_directory)
 
-combinedArray = []
-print(combinedArray)
 counter = 0
 
-#Iterates through directory only considering 'png' and 'jpeg' files.
+#Iterates through directory only considering files ending with 'png', 'jpeg' and 'jpg'.
 for file in os.listdir(source_directory_path):
 	filename = os.fsdecode(file)
 	if filename.endswith(".png") or filename.endswith(".jpeg") or filename.endswith("jpg"): 
@@ -23,23 +24,20 @@ for file in os.listdir(source_directory_path):
 		#Open and convert each image to 'grayscale'
 		img = Image.open(filepath).convert('L')
 
-		#Resize the image to a 'basewidth' and aspect ratio height
-		basewidth = 28
-		wpercent = (basewidth/float(img.size[0]))
-		
-		#If required, a fixed 'hsize' can be defined, but be aware that this might distort the images
-		hsize = int((float(img.size[1])*float(wpercent)))
-		hsize = basewidth
-		img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+		#Resize the image to a 'width' and aspect height given in pixels
+		width = 28
+		height = width
+		img = img.resize((width,height), Image.ANTIALIAS)
 		
 		#If you want to save a copy of the reworked image. Currently saved to folder 'Reworked_Images' in current working directory
-		img.save(''.join(["Reworked_Images\ ",filename,"_",str(basewidth),"_",str(hsize),"_gray.png"]))
+		target_directory = "Reworked_Images\ "
+		img.save(''.join([target_directory,filename,"_",str(width),"_",str(height),"_gray.png"]))
 		
-		#Only for printing number of reworked images
+		#Only for printing purposes
 		counter += 1
 		
 		continue
 	else:
 		continue
 
-print("Resizing and grayscaling done.",counter,"images have been reworked.")
+print("Resizing and grayscaling done.","\nReworked",counter,"images and stored at",(''.join([cwd," \ ",target_directory,"."])))
